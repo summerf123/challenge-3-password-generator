@@ -83,7 +83,7 @@ function initializePassword() {
 
   console.log("length want password to be: " + preferredLengthConfirm);
 
-  //need to insert a loop so will execute until the user confirms correct length for password
+  //need to run this sequence each time input is too short or too long but executing the function initializePassword all over again
 
   if (preferredLengthConfirm < 8) {
     alert("your input is too short");

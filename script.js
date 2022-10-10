@@ -96,22 +96,15 @@ function initializePassword() {
       `okay, your password will be ${preferredLengthConfirm} characters long`
     );
     generatePassword(preferredLengthConfirm);
-    //STORE the data for password length***********
+    //User input for the preferredLengthConfirm is the desired length. This value is called in the function below in the passwordLength parameter.
   }
 }
 function generatePassword(passwordLength) {
-  let specialCharaConfirm = confirm(
+  let specialCharConfirm = confirm(
     "Click 'OK' if you want to include special characters?"
   );
   {
-    console.log("want special characters? " + specialCharaConfirm);
-
-    // if (specialCharaConfirm === true) {
-    //   alert("OK your password will contain special characters");
-    // } else if (specialCharaConfirm === false) {
-    //   alert("You do not want to include special characters");
-    // }
-    //STORE the data to include/not include special characters based on user input***********
+    console.log("want special characters? " + specialCharConfirm);
   }
 
   let uppercaseConfirm = confirm(
@@ -138,7 +131,7 @@ function generatePassword(passwordLength) {
       newArray = [...newArray, ...lowercase];
       console.log(newArray);
     }
-    if (specialCharaConfirm) {
+    if (specialCharConfirm) {
       console.log(newArray);
       newArray = [...newArray, ...specialChar];
       console.log(newArray);
@@ -166,7 +159,7 @@ function generatePassword(passwordLength) {
     //   //STORE the data to include/not include uppercase characters based on user input***********
   }
 }
-
+generateBtn.addEventListener("click", initializePassword);
 // ===========original code given===============
 // // Assignment Code
 // var generateBtn = document.querySelector("#generate");
@@ -179,4 +172,3 @@ function generatePassword(passwordLength) {
 // }
 
 // // Add event listener to generate button, once user clicks on button# generate, will call function createPassword (call back function is triggered)
-generateBtn.addEventListener("click", initializePassword);

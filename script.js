@@ -158,6 +158,7 @@ function generatePassword(passwordLength) {
   }
 }
 generateBtn.addEventListener("click", initializePassword);
+
 // ===========original code given===============
 // // Assignment Code
 // var generateBtn = document.querySelector("#generate");

@@ -96,10 +96,11 @@ function initializePassword() {
       `okay, your password will be ${preferredLengthConfirm} characters long`
     );
     generatePassword(preferredLengthConfirm);
-    //User input for the preferredLengthConfirm is the desired length. This value is called in the function below in the passwordLength parameter.
+    //User input for the preferredLengthConfirm is the desired length. This value is called in the function below in the passwordLength parameter and is inserted there to run the function.
   }
 }
 function generatePassword(passwordLength) {
+  //run confirm boxes to see what type of characters user wants to include in password
   let specialCharConfirm = confirm(
     "Click 'OK' if you want to include special characters?"
   );
@@ -120,28 +121,25 @@ function generatePassword(passwordLength) {
 
     let numConfirm = confirm('Click "OK" if you want to include numbers');
     console.log("want numbers? " + lowercaseConfirm);
+
     let newArray = [];
     if (uppercaseConfirm) {
-      console.log(newArray);
       newArray = [...newArray, ...uppercase];
       console.log(newArray);
     }
     if (lowercaseConfirm) {
-      console.log(newArray);
       newArray = [...newArray, ...lowercase];
       console.log(newArray);
     }
     if (specialCharConfirm) {
-      console.log(newArray);
       newArray = [...newArray, ...specialChar];
       console.log(newArray);
     }
     if (numConfirm) {
-      console.log(newArray);
       newArray = [...newArray, ...numbers];
       console.log(newArray);
     }
-    console.log(newArray);
+    // console.log(newArray);
 
     let randomPassword = "";
     for (let i = 0; i < passwordLength; i++) {

@@ -121,7 +121,7 @@ function generatePassword(passwordLength) {
 
     let numConfirm = confirm('Click "OK" if you want to include numbers');
     console.log("want numbers? " + lowercaseConfirm);
-
+    //create empty array called newArray that uses a spread operator.............
     let newArray = [];
     if (uppercaseConfirm) {
       newArray = [...newArray, ...uppercase];

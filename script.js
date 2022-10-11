@@ -140,11 +140,11 @@ function generatePassword(passwordLength) {
     //   generatePassword();
     // }
 
-    //create empty array called newArray that uses a spread operator to spread the array of each declared array at the top
+    //create empty array called newArray that uses a spread operator to spread the array of each declared array from the top of code
     let newArray = [];
     if (uppercaseConfirm) {
       newArray = [...newArray, ...uppercase];
-      console.log(newArray);
+      // console.log(newArray);
     }
     if (lowercaseConfirm) {
       newArray = [...newArray, ...lowercase];
@@ -156,13 +156,14 @@ function generatePassword(passwordLength) {
     }
     if (numConfirm) {
       newArray = [...newArray, ...numbers];
-      // console.log(newArray);
+      console.log(newArray);
     }
-    // console.log(newArray);
 
     let randomPassword = "";
     for (let i = 0; i < passwordLength; i++) {
       let randomIndex = Math.floor(Math.random() * newArray.length);
+      //this will log each index of the randomly selected characters that passes the amount of times the user selected the length for
+      console.log(randomIndex);
       randomPassword += newArray[randomIndex];
     }
     console.log(randomPassword);

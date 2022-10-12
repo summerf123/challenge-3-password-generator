@@ -184,7 +184,7 @@ function generatePassword(validatedPassword, passwordLength) {
   console.log(randomPassword);
   document.getElementById("password").innerHTML = randomPassword;
 }
-
+//when user clicks on generate button, execute main function
 generateBtn.addEventListener("click", main);
 
 function main() {

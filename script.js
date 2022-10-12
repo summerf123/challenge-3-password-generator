@@ -104,11 +104,12 @@ function initializePassword() {
     alert(
       `okay, your password will be ${preferredLengthConfirm} characters long`
     );
-  generatePassword(preferredLengthConfirm);
+
+  return preferredLengthConfirm;
   //User input for the preferredLengthConfirm is the desired length. This value is called in the function below in the passwordLength parameter and is inserted there to run the function.
 }
 
-function generatePassword(passwordLength) {
+function validatePassword(passwordLength) {
   //run confirm boxes to see what type of characters user wants to include in password
   let specialCharConfirm = confirm(
     "Click 'OK' if you want to include special characters?"
@@ -130,56 +131,70 @@ function generatePassword(passwordLength) {
     let numConfirm = confirm('Click "OK" if you want to include numbers');
     console.log("want numbers? " + numConfirm);
     // Loop to beginning of generatePW function if user never selects any speical characters
-    // while (
-    //   specialCharConfirm === false &&
-    //   uppercaseConfirm === false &&
-    //   lowercaseConfirm === false &&
-    //   numConfirm === false
-    // ) {
-    //   alert("You must choose at least one special character parameter");
-    //   generatePassword();
-    // }
-
-    //create empty array called newArray that uses a spread operator to spread the array of each declared array from the top of code
-    let newArray = [];
-    if (uppercaseConfirm) {
-      newArray = [...newArray, ...uppercase];
-      // console.log(newArray);
+    if (
+      specialCharConfirm === false &&
+      uppercaseConfirm === false &&
+      lowercaseConfirm === false &&
+      numConfirm === false
+    ) {
+      alert("You must choose at least one special character parameter");
+      return false;
+    } else {
+      return {
+        specialCharConfirm: specialCharConfirm,
+        uppercaseConfirm: uppercaseConfirm,
+        lowercaseConfirm: lowercaseConfirm,
+        numConfirm: numConfirm,
+      };
     }
-    if (lowercaseConfirm) {
-      newArray = [...newArray, ...lowercase];
-      // console.log(newArray);
-    }
-    if (specialCharConfirm) {
-      newArray = [...newArray, ...specialChar];
-      // console.log(newArray);
-    }
-    if (numConfirm) {
-      newArray = [...newArray, ...numbers];
-      console.log(newArray);
-    }
-
-    let randomPassword = "";
-    for (let i = 0; i < passwordLength; i++) {
-      let randomIndex = Math.floor(Math.random() * newArray.length);
-      //this will log each index of the randomly selected characters that passes the amount of times the user selected the length for
-      console.log(randomIndex);
-      randomPassword += newArray[randomIndex];
-    }
-    console.log(randomPassword);
-    document.getElementById("password").innerHTML = randomPassword;
   }
 }
-generateBtn.addEventListener("click", initializePassword);
-// ===========original code given===============
-// // Assignment Code
-// var generateBtn = document.querySelector("#generate");
+function generatePassword(validatedPassword, passwordLength) {
+  uppercaseConfirm = validatedPassword.uppercaseConfirm;
+  lowercaseConfirm = validatedPassword.lowercaseConfirm;
+  specialCharConfirm = validatedPassword.specialCharConfirm;
+  numConfirm = validatedPassword.numConfirm;
 
-// // Write password to the #password input
-// function writePassword() {
-//   var password = generatePassword();
-//   var passwordText = document.querySelector("#password");
-//   passwordText.value = password;
-// }
+  //create empty array called newArray that uses a spread operator to spread the array of each declared array from the top of code
+  let newArray = [];
+  if (uppercaseConfirm) {
+    newArray = [...newArray, ...uppercase];
+    console.log("uppercase" + newArray);
+  }
+  if (lowercaseConfirm) {
+    newArray = [...newArray, ...lowercase];
+    console.log("lowercase" + newArray);
+  }
+  if (specialCharConfirm) {
+    newArray = [...newArray, ...specialChar];
+    console.log("specialChar" + newArray);
+  }
+  if (numConfirm) {
+    newArray = [...newArray, ...numbers];
+    console.log("numconfirm" + newArray);
+  }
+  console.log("pw length:" + passwordLength);
+  let randomPassword = "";
+  for (let i = 0; i < passwordLength; i++) {
+    let randomIndex = Math.floor(Math.random() * newArray.length);
+    //this will log each index of the randomly selected characters that passes the amount of times the user selected the length for
+    console.log(randomIndex);
+    randomPassword += newArray[randomIndex];
+  }
+  console.log(randomPassword);
+  document.getElementById("password").innerHTML = randomPassword;
+}
 
-// // Add event listener to generate button, once user clicks on button# generate, will call function createPassword (call back function is triggered)
+generateBtn.addEventListener("click", main);
+
+function main() {
+  preferredLengthConfirm = initializePassword(); //returns # of characters user input
+
+  let validatedPassword = false;
+
+  while (validatedPassword == false) {
+    validatedPassword = validatePassword(preferredLengthConfirm);
+  }
+
+  generatePassword(validatedPassword, preferredLengthConfirm);
+}
